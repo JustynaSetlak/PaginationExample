@@ -6,7 +6,7 @@ namespace PaginationExample
 {
     class Program
     {
-        private const string EndCommand = "Koniec";
+        private const string END_COMMAND = "Koniec";
         static void Main(string[] args)
         {
             do
@@ -26,7 +26,7 @@ namespace PaginationExample
                         Console.WriteLine($"{person.FirstName} {person.LastName}, ");
                     }
                 }
-            } while (Console.ReadLine() != EndCommand);
+            } while (Console.ReadLine() != END_COMMAND);
             Console.ReadKey();
         }
     }

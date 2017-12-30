@@ -8,8 +8,8 @@ namespace PaginationExample.Repositories
     public class PeopleRepository: IPeopleRepository
     {
         private readonly PeopleContext _context;
-        private const int PageSize = 5;
-        private const int NumberOfFirstPage = 1;
+        private const int PAGE_SIZE = 5;
+        private const int NUMBER_OF_FIRST_PAGE = 1;
 
         public PeopleRepository(PeopleContext context)
         {
@@ -18,17 +18,17 @@ namespace PaginationExample.Repositories
 
         public List<Person> GetPeople(int numberOfPage)
         {
-            if (numberOfPage > GetNumberOfPages() || numberOfPage < NumberOfFirstPage)
+            if (numberOfPage > GetNumberOfPages() || numberOfPage < NUMBER_OF_FIRST_PAGE)
             {
                 return null;
             }
-            var people = _context.People.Skip(PageSize * (numberOfPage - 1)).Take(PageSize).ToList();
+            var people = _context.People.Skip(PAGE_SIZE * (numberOfPage - 1)).Take(PAGE_SIZE).ToList();
             return people;
         }
 
         private int GetNumberOfPages()
         {
-            var pages = (double)_context.People.Count() / PageSize;
+            var pages = (double)_context.People.Count() / PAGE_SIZE;
             var numberOfPages = (int)Math.Ceiling(pages);
             return numberOfPages;
         }
