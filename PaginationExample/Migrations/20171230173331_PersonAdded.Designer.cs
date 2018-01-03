@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using PaginationExample;
 using System;
+using PaginationExample.DataAccess;
 
 namespace PaginationExample.Migrations
 {

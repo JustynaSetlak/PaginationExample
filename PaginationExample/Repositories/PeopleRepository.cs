@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using PaginationExample.DataAccess;
+using PaginationExample.DataAccess.Model;
 using PaginationExample.Repositories.Interfaces;
 
 namespace PaginationExample.Repositories
@@ -8,7 +10,6 @@ namespace PaginationExample.Repositories
     public class PeopleRepository: IPeopleRepository
     {
         private readonly PeopleContext _context;
-        private const int PAGE_SIZE = 5;
         private const int NUMBER_OF_FIRST_PAGE = 1;
 
         public PeopleRepository(PeopleContext context)
@@ -16,19 +17,19 @@ namespace PaginationExample.Repositories
             _context = context;
         }
 
-        public List<Person> GetPeople(int numberOfPage)
+        public List<Person> GetPeople(int numberOfPage, int numberOfElementsOnPage)
         {
-            if (numberOfPage > GetNumberOfPages() || numberOfPage < NUMBER_OF_FIRST_PAGE)
+            if (numberOfPage > GetNumberOfPages(numberOfElementsOnPage) || numberOfPage < NUMBER_OF_FIRST_PAGE)
             {
-                return null;
+                return new List<Person>();
             }
-            var people = _context.People.Skip(PAGE_SIZE * (numberOfPage - 1)).Take(PAGE_SIZE).ToList();
+            var people = _context.People.Skip(numberOfElementsOnPage * (numberOfPage - 1)).Take(numberOfElementsOnPage).ToList();
             return people;
         }
 
-        private int GetNumberOfPages()
+        private int GetNumberOfPages(int numberOfElementsOnPage)
         {
-            var pages = (double)_context.People.Count() / PAGE_SIZE;
+            var pages = (double)_context.People.Count() / numberOfElementsOnPage;
             var numberOfPages = (int)Math.Ceiling(pages);
             return numberOfPages;
         }

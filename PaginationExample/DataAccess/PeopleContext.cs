@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PaginationExample.DataAccess.Model;
 
-namespace PaginationExample
+namespace PaginationExample.DataAccess
 {
     public class PeopleContext : DbContext
     {

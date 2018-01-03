@@ -1,4 +1,4 @@
-﻿namespace PaginationExample
+﻿namespace PaginationExample.DataAccess.Model
 {
     public class Person
     {
